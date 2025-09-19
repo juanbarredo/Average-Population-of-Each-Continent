@@ -12,21 +12,21 @@
 --for now, let me begin by querying the names of all continents.
 --I think an order by will do this.
 
-USE Population_Census;
-SELECT *
-	FROM CITY;
+--USE Population_Census;
+--SELECT *
+--	FROM CITY;
 
-USE Population_Census;
-SELECT *
-	FROM COUNTRY;
+--USE Population_Census;
+--SELECT *
+--	FROM COUNTRY;
 
 --ok,
 --CONTINENT is in the COUNTRY table.
 
-USE Population_Census;
-SELECT CONTINENT
-	FROM COUNTRY
-	ORDER BY CONTINENT ASC;
+--USE Population_Census;
+--SELECT CONTINENT
+--	FROM COUNTRY
+--	ORDER BY CONTINENT ASC;
 
 --I am having doubts about the fact the there are so many repeating continents in the result set in the query from lines 26 to 29.
 --but let me.  well, how would I go about 
@@ -43,10 +43,10 @@ SELECT CONTINENT
 --what is the next step
 --let me add cities to the result set.
 
-USE Population_Census;
-SELECT COUNTRY.CONTINENT, CITY.NAME
-	FROM COUNTRY JOIN CITY
-	ON COUNTRY.CODE = CITY.COUNTRYCODE;
+---USE Population_Census;
+--SELECT COUNTRY.CONTINENT, CITY.NAME
+--	FROM COUNTRY JOIN CITY
+--	ON COUNTRY.CODE = CITY.COUNTRYCODE;
 
 --So, 
 --in the above query.
@@ -69,4 +69,39 @@ SELECT COUNTRY.CONTINENT, CITY.NAME
 --for other JOINS it matters a lot.  Order matters a lot for other queries.
 --I am not quite there yet however.
 --for now I will leave it at that.
+
+--------------------------------------09 18 2025------------------------------------------
+
+--ok,
+--I am getting or I got a somewhat clear picture of what might be the next step
+
+--"and their respective average city populations."
+
+--actually looking at the result sets again, the query from line 46 to 49 isn't giving me what I expected.
+--why not?
+
+--I will have to work on that.
+
+--oh wait, yeah.
+--it worked.
+--I just hadn't scrolled down enough on the result set window.
+
+USE Population_Census;
+SELECT COUNTRY.CONTINENT, AVG(CITY.POPULATION) AS 'AVG(CITY.POPULATION)'
+	FROM COUNTRY JOIN CITY
+	ON COUNTRY.CODE = CITY.COUNTRYCODE
+	GROUP BY CONTINENT;
+
+--This is insane,
+--I think I got the answer
+--just worked itself out.
+--the AVG and the GROUP BY automatically did what I was thinking or wondering how I would do.
+--which is to not have repeating continent with every city.
+
+--now I am wondering about the "rounded down to the nearest integer"?
+
+--what was an integer again
+--yeah, I thought so,
+
+--I got the right answer.
 
